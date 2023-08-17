@@ -1,8 +1,8 @@
-package me.quentixx.autotrade.data
+package fr.quentixx.tradeogre.wrapper.data
 
 import kotlinx.serialization.Serializable
-import me.quentixx.autotrade.enums.OrderType
-import me.quentixx.autotrade.serializer.OrderTypeSerializer
+import fr.quentixx.tradeogre.wrapper.enums.OrderType
+import fr.quentixx.tradeogre.wrapper.serializer.OrderTypeSerializer
 
 /**
  * Represents information about a market.

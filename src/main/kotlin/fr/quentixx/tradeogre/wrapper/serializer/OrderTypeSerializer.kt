@@ -1,6 +1,6 @@
-package me.quentixx.autotrade.serializer
+package fr.quentixx.tradeogre.wrapper.serializer
 
-import me.quentixx.autotrade.enums.OrderType
+import fr.quentixx.tradeogre.wrapper.enums.OrderType
 
 /**
  * Serializer for [OrderType] enumeration.

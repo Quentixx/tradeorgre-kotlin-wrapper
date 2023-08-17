@@ -1,14 +1,14 @@
-package me.quentixx.autotrade
+package fr.quentixx.tradeogre.wrapper
 
 import io.ktor.client.*
 import io.ktor.client.engine.cio.*
 import io.ktor.client.request.*
 import io.ktor.client.statement.*
 import kotlinx.serialization.json.Json
-import me.quentixx.autotrade.data.MarketInfoResponse
-import me.quentixx.autotrade.data.OrderBookResponse
-import me.quentixx.autotrade.data.TickerResponse
-import me.quentixx.autotrade.data.TradeHistoryResponse
+import fr.quentixx.tradeogre.wrapper.data.MarketInfoResponse
+import fr.quentixx.tradeogre.wrapper.data.OrderBookResponse
+import fr.quentixx.tradeogre.wrapper.data.TickerResponse
+import fr.quentixx.tradeogre.wrapper.data.TradeHistoryResponse
 
 /**
  * Represents public service for interacting with the TradeOgre API.

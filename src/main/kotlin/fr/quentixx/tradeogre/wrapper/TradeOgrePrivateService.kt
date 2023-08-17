@@ -1,12 +1,12 @@
-package me.quentixx.autotrade
+package fr.quentixx.tradeogre.wrapper
 
 import io.ktor.client.*
 import io.ktor.client.request.*
 import io.ktor.client.request.forms.*
 import io.ktor.client.statement.*
 import io.ktor.http.*
-import me.quentixx.autotrade.TradeOgreService.Companion.json
-import me.quentixx.autotrade.data.*
+import fr.quentixx.tradeogre.wrapper.TradeOgreService.Companion.json
+import fr.quentixx.tradeogre.wrapper.data.*
 
 /**
  * Represents the private TradeOgre API service for authenticated operations.

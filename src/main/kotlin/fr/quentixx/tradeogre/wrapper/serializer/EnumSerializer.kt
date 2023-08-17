@@ -1,4 +1,4 @@
-package me.quentixx.autotrade.serializer
+package fr.quentixx.tradeogre.wrapper.serializer
 
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.SerializationException
