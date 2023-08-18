@@ -13,14 +13,14 @@ import fr.quentixx.tradeogre.wrapper.data.*
  *
  * @param apiKey The API key for authentication.
  * @param apiSecret The API secret for authentication.
- * @param apiUrl The target API URL.0
+ * @param apiUrl The target API URL.
  * @param client The HTTP client instance to use for making API requests.
  */
 class TradeOgrePrivateService(
     private val apiKey: String,
     private val apiSecret: String,
-    private val apiUrl: String,
-    private val client: HttpClient
+    private val apiUrl: String = "https://tradeogre.com/api/v1/",
+    private val client: HttpClient = HttpClient()
 ) {
 
     /**

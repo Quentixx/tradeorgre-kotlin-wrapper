@@ -29,9 +29,7 @@ class TradeOgreService(
     }
 
     // Initialize the HTTP client with JSON support
-    val client = HttpClient(CIO) {
-
-    }
+    val client = HttpClient(CIO)
 
     /**
      * Access the private TradeOgre API service for authenticated operations.
