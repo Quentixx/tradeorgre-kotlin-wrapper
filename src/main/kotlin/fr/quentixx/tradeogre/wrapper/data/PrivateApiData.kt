@@ -52,6 +52,30 @@ data class OrderResponse(
 )
 
 /**
+ * Represents a unique order retrieve details.
+ *
+ * @param success true if the order was successfully retrieved, false otherwise.
+ * @param date Unix UTC timestamp representing the date of the order.
+ * @param type The type of the order (buy or sell).
+ * @param market The market in which the order was placed.
+ * @param price The price at which the order was executed.
+ * @param quantity The quantity of the asset traded in the order.
+ * @param fulfilled The amount of the asset that has been fully executed or filled.
+ *                   A value of "0.000000000" means that the command has not yet been executed at all.
+ */
+@Serializable
+data class GetOrderResponse(
+    val success: Boolean,
+    val date: Long,
+    @Serializable(with = OrderTypeSerializer::class)
+    val type: OrderType,
+    val market: String,
+    val price: String,
+    val quantity: String,
+    val fulfilled: String
+)
+
+/**
  * Represents the response of a balance request for a single asset.
  *
  * @param success true if the balance request was successful, false otherwise.

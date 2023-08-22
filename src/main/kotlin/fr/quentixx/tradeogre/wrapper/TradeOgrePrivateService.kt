@@ -147,6 +147,24 @@ class TradeOgrePrivateService(
     }
 
     /**
+     * Retrieve information about a specific order by the uuid of the order.
+     * Date is a Unix UTC timestamp.
+     * If an order was 100% fulfilled, it will be removed and this api method
+     * will return a 'Order not found' error message, so your app must take this
+     * into account if it needs to determine if an order was completed.
+     *
+     * @param uuid The unique id of the active order.
+     * @return [GetOrderResponse] for this request.
+     */
+    suspend fun getOrder(uuid: String): GetOrderResponse {
+        return json.decodeFromString<GetOrderResponse>(
+            client.get("${apiUrl}account/order/$uuid"){
+                basicAuth(apiKey, apiSecret)
+            }.bodyAsText()
+        )
+    }
+
+    /**
      * Retrieve all balances for your account.
      *
      * @return [BalancesResponse] for this request.
