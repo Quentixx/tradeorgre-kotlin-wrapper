@@ -193,6 +193,5 @@ BalancesResponse(success=true,
 ````
 ___
 ### // TODO
-- getOrder(uuid)
 - Serializer for BigDecimal 
 - Serializer for Date 
