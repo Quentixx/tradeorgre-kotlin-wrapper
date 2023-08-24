@@ -3,10 +3,8 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 plugins {
     kotlin("jvm") version "1.9.0"
     kotlin("plugin.serialization") version "1.9.0"
+    `maven-publish`
 }
-
-group = "me.quentixx"
-version = "1.0-SNAPSHOT"
 
 repositories {
     mavenLocal()
@@ -42,4 +40,47 @@ tasks.test {
 
 tasks.withType<KotlinCompile> {
     kotlinOptions.jvmTarget = "17"
+}
+
+publishing {
+    val projectName = project.name
+
+    publications {
+        val projectPath = "Quentixx/$projectName"
+        val projectGitUrl = "https://github.com/$projectPath"
+
+        create<MavenPublication>(projectName) {
+            from(components["kotlin"])
+
+            pom {
+                name.set(projectName)
+                description.set(project.description)
+                url.set(projectGitUrl)
+
+                licenses {
+                    license {
+                        name.set("MIT")
+                        url.set("https://mit-license.org")
+                    }
+                }
+
+                developers {
+                    developer {
+                        name.set("Quentixx")
+                        url.set("https://github.com/Quentixx")
+                    }
+                }
+
+                scm {
+                    connection.set("scm:git:$projectGitUrl.git")
+                    developerConnection.set("scm:git:git@github.com:$projectPath.git")
+                    url.set(projectGitUrl)
+                }
+
+                distributionManagement {
+                    downloadUrl.set("$projectGitUrl/releases")
+                }
+            }
+        }
+    }
 }
