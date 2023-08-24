@@ -3,6 +3,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 plugins {
     kotlin("jvm") version "1.9.0"
     kotlin("plugin.serialization") version "1.9.0"
+    id("org.jetbrains.dokka") version "1.8.10"
     `maven-publish`
 }
 
@@ -34,12 +35,43 @@ dependencies {
     testImplementation(kotlin("test"))
 }
 
-tasks.test {
-    useJUnitPlatform()
+val dokkaOutputDir = "${rootProject.projectDir}/dokka"
+
+tasks {
+    test {
+        useJUnitPlatform()
+    }
+
+    withType<KotlinCompile> {
+        kotlinOptions.jvmTarget = "17"
+    }
+
+    clean {
+        delete(dokkaOutputDir)
+    }
+
+    val deleteDokkaOutputDir by register<Delete>("deleteDokkaOutputDirectory") {
+        group = "documentation"
+        delete(dokkaOutputDir)
+    }
+
+    dokkaHtml.configure {
+        dependsOn(deleteDokkaOutputDir)
+        outputDirectory.set(file(dokkaOutputDir))
+    }
 }
 
-tasks.withType<KotlinCompile> {
-    kotlinOptions.jvmTarget = "17"
+val sourcesJar by tasks.registering(Jar::class) {
+    group = "build"
+    archiveClassifier.set("sources")
+    from(sourceSets.main.get().allSource)
+}
+
+val javadocJar = tasks.register<Jar>("javadocJar") {
+    group = "documentation"
+    dependsOn(tasks.dokkaHtml)
+    archiveClassifier.set("javadoc")
+    from(dokkaOutputDir)
 }
 
 publishing {
@@ -52,10 +84,22 @@ publishing {
         create<MavenPublication>(projectName) {
             from(components["kotlin"])
 
+            artifact(sourcesJar.get())
+            artifact(javadocJar.get())
+
             pom {
                 name.set(projectName)
                 description.set(project.description)
                 url.set(projectGitUrl)
+
+                issueManagement {
+                    system.set("GitHub")
+                    url.set("$projectGitUrl/issues")
+                }
+
+                ciManagement {
+                    system.set("GitHub Actions")
+                }
 
                 licenses {
                     license {
