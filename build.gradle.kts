@@ -12,12 +12,8 @@ repositories {
     mavenCentral()
     gradlePluginPortal()
     maven("https://maven.pkg.jetbrains.space/public/p/compose/dev")
-    maven {
-        url = uri("https://maven.pkg.jetbrains.space/public/p/ktor/eap")
-    }
-    maven {
-        url = uri("https://maven.pkg.jetbrains.space/kotlin/p/kotlin/dev")
-    }
+    maven("https://maven.pkg.jetbrains.space/public/p/ktor/eap")
+    maven("https://maven.pkg.jetbrains.space/kotlin/p/kotlin/dev")
 }
 
 dependencies {
